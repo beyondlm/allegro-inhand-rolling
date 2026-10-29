@@ -66,8 +66,10 @@ Isaac Sim 6.2's [requirements page](https://docs.isaacsim.omniverse.nvidia.com/6
 lists Linux driver 595.58.03 as its tested driver. The general
 [Omniverse requirements](https://docs.omniverse.nvidia.com/dev-guide/latest/common/technical-requirements.html)
 also list R580 for Ada GPUs, so the crash alone does not establish that every R580 version is unsupported.
-No host drivers or system graphics configuration were changed. A real desktop OpenGL launch still needs the author's
-confirmation; Xvfb is not an equivalent test of that desktop's exact graphics stack.
+No host drivers or system graphics configuration were changed. The source-based launcher has subsequently passed
+on the actual host X display using the selected local Lab 3.0 checkout and native Sim build; see
+[local source validation](LOCAL_LAB.md). The standalone pip-environment host failure and the Kit/RTX failure are not
+claimed to be fixed by that separate source-based result.
 
 ## Remaining baseline and release work
 
@@ -77,7 +79,14 @@ confirmation; Xvfb is not an equivalent test of that desktop's exact graphics st
 - Other upstream schema-deprecation and USD diagnostic warnings remain. Newton physics is not part of the tested
   compatibility claim; the OpenGL viewer tests still use PhysX physics.
 - The original checkpoint has been packaged and evaluated without conversion; its exact match to the historical
-  GIF remains unverified. The host OpenGL command was reported as run, but its log is empty and desktop display
-  confirmation is still pending.
+  GIF remains unverified. Earlier direct host logs were empty; the new source-based launch has completed on the
+  real desktop display with a finite-value JSON result.
 - Confirm cylinder/texture provenance and redistribution terms with the author.
 - Publish a versioned repository/release, then link it in PR #6345 for maintainer review and README listing.
+
+## Selected local Lab 3.0 source
+
+The user-selected source checkout `e3f7d9ff1f` and its existing named Python environment were verified through
+`scripts/evaluate_with_lab.sh`, including 100 headless steps, 60 real desktop OpenGL steps, and a 64-environment,
+1,200-step seed-7 evaluation. The helper does not install into or synchronize that environment. Details and precise
+results are recorded in [LOCAL_LAB.md](LOCAL_LAB.md).

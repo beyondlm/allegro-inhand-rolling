@@ -66,5 +66,33 @@
   },
   "origin_training_base_commit": "0f577c72e86f3df3e2a7f7960e02729b413d9d42",
   "origin_training_worktree_dirty": true,
-  "origin_training_diff_sha256": "77e36a26051ca0706ae40437765dc7703cf3c6e2108238eaf809cd943b8a5a15"
+  "origin_training_diff_sha256": "77e36a26051ca0706ae40437765dc7703cf3c6e2108238eaf809cd943b8a5a15",
+  "local_source_validation": {
+    "source_commit": "e3f7d9ff1f5d7f8280de3ece9000b7117f66bcf4",
+    "release": "3.0.0",
+    "runtime": "existing local Isaac Sim 6.2 build",
+    "task": "IsaacContrib-Inhand-Roll-Allegro-v0",
+    "checkpoint_iteration": 1499,
+    "num_envs": 64,
+    "steps": 1200,
+    "seed": 7,
+    "gravity": [
+      0.0,
+      0.0,
+      -10.0
+    ],
+    "gravity_curriculum": false,
+    "all_finite": true,
+    "completed_episodes": 128,
+    "metrics_time_mean": {
+      "rotate/ang_vel": 0.7217696309089661,
+      "rotate/object_pos_diff": 0.0004367743676993996,
+      "rotate/drop_rate": 1.302083364862483e-05,
+      "rotate/success_rate": 0.896888017654419,
+      "rotate/total_reward": 3.2678825855255127
+    },
+    "integrated_turns_per_env": 4.594928181310992,
+    "drop_events_estimate": 1,
+    "object_mass_kg": 0.1638205200433731
+  }
 }

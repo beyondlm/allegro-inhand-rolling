@@ -5,6 +5,19 @@ Extracted from [Isaac Lab PR #6345](https://github.com/isaac-sim/IsaacLab/pull/6
 
 ![Original Allegro rolling policy](docs/media/allegro_rotate_demo.gif)
 
+## Use an existing Lab 3.0 checkout
+
+Use the source launcher when running against an existing Lab checkout and its configured native Isaac Sim build:
+
+```bash
+scripts/evaluate_with_lab.sh /path/to/IsaacLab_3.0 /path/to/IsaacLab_3.0/isaaclab_3.0 --num_envs 1 --steps 1800 --viz newton_gl --real-time
+```
+
+The second path is the existing Python environment root. The launcher verifies the imported Lab root, keeps that
+environment unchanged with `--no-sync`, and lets its `isaaclab -p` command configure the linked Sim runtime.
+It prioritizes that interpreter's standard library and packages while clearing inherited Python/native-library paths
+from other installations. See [local source validation](docs/LOCAL_LAB.md) for the verified workspace configuration.
+
 ## Installation
 
 Use Linux x86-64, Python 3.12, [uv](https://docs.astral.sh/uv/), and a compatible NVIDIA GPU/driver.

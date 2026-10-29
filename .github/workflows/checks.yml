@@ -16,6 +16,8 @@ jobs:
         run: |
           uv tool run ruff@0.14.10 check .
           uv tool run ruff@0.14.10 format --check .
+      - name: Check local-source launcher syntax
+        run: bash -n scripts/evaluate_with_lab.sh
       - name: Build distributions
         run: uv build
       - name: Install wheel with only lightweight test dependencies

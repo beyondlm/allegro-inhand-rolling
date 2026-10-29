@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import importlib.metadata
 import json
 import math
 import sys
@@ -70,6 +71,13 @@ def main() -> int:
         from rsl_rl.runners import OnPolicyRunner
 
         from isaaclab_rl.rsl_rl import RslRlVecEnvWrapper
+
+        # Earlier Lab 3.0 source checkouts retain fields removed by RSL-RL 5.
+        # Use that checkout's own migration helper, as its official entrypoints do.
+        if hasattr(agent_cfg.actor, "stochastic"):
+            from isaaclab_rl.rsl_rl import handle_deprecated_rsl_rl_cfg
+
+            agent_cfg = handle_deprecated_rsl_rl_cfg(agent_cfg, importlib.metadata.version("rsl-rl-lib"))
 
         raw_env = gym.make(TASK_ID, cfg=env_cfg)
         try:
