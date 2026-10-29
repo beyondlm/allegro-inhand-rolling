@@ -5,13 +5,15 @@
 
 """Exercise the installed discovery entry point and the bundled reset dataset."""
 
+import hashlib
 import importlib.metadata
+import json
 
 import gymnasium as gym
 import numpy as np
 import pytest
 
-from allegro_inhand.assets import ASSETS_DIR, DEFAULT_GRASP_CACHE
+from allegro_inhand.assets import ASSETS_DIR, DEFAULT_GRASP_CACHE, DEFAULT_POLICY_CHECKPOINT
 
 
 def test_installed_task_discovery():
@@ -35,6 +37,8 @@ def test_bundled_reset_resources(monkeypatch, tmp_path):
     assert cache.shape == (50000, 23)
     assert np.isfinite(cache).all()
     np.testing.assert_allclose(np.linalg.norm(cache[:, 19:23], axis=1), 1.0, atol=1.0e-3)
+    metadata = json.loads((DEFAULT_POLICY_CHECKPOINT.parent / "metadata.json").read_text())
+    assert hashlib.sha256(DEFAULT_POLICY_CHECKPOINT.read_bytes()).hexdigest() == metadata["sha256"]
 
 
 def test_runtime_configurations_resolve():

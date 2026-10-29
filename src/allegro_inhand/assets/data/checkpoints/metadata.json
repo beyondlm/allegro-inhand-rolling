@@ -1,0 +1,70 @@
+{
+  "format_version": 1,
+  "file": "allegro_inhand_roll.pt",
+  "sha256": "f80bc191be2ec6725724e85bb904e5ec57113c304c27bee5832b523b8d9b3809",
+  "origin_repository": "https://github.com/beyondlm/IsaacLab",
+  "origin_experiment": "allegro_inhand_roll/2026-08-01_20-45-00",
+  "origin_checkpoint": "model_1499.pt",
+  "origin_training_commit": null,
+  "iteration": 1499,
+  "observation_dim": 121,
+  "action_dim": 16,
+  "hidden_dims": [
+    512,
+    256,
+    128
+  ],
+  "conversion": "none; original checkpoint bytes preserved",
+  "validation": {
+    "num_envs": 64,
+    "steps": 1200,
+    "seed": 42,
+    "gravity": [
+      0,
+      0,
+      -10
+    ],
+    "all_finite": true,
+    "completed_episodes": 128,
+    "metrics_time_mean": {
+      "rotate/ang_vel": 0.7225313782691956,
+      "rotate/object_pos_diff": 0.00039697170723229647,
+      "rotate/drop_rate": 0.0,
+      "rotate/success_rate": 0.89704430103302,
+      "rotate/total_reward": 3.2783899307250977
+    },
+    "integrated_turns_per_env": 4.599777615621701,
+    "drop_events_estimate": 0,
+    "object_mass_kg": 0.1638205200433731
+  },
+  "selection_reason": "Highest mean reward among five complete original checkpoints under the same fixed-gravity evaluation, with no observed drops and sub-millimeter mean object displacement.",
+  "historical_gif_matches_checkpoint": "not verified",
+  "additional_validation": {
+    "task": "IsaacContrib-Inhand-Roll-Allegro-v0",
+    "checkpoint_iteration": 1499,
+    "num_envs": 64,
+    "steps": 1200,
+    "seed": 7,
+    "gravity": [
+      0.0,
+      0.0,
+      -10.0
+    ],
+    "gravity_curriculum": false,
+    "all_finite": true,
+    "completed_episodes": 128,
+    "metrics_time_mean": {
+      "rotate/ang_vel": 0.7217696309089661,
+      "rotate/object_pos_diff": 0.0004367743676993996,
+      "rotate/drop_rate": 1.302083364862483e-05,
+      "rotate/success_rate": 0.896888017654419,
+      "rotate/total_reward": 3.2678825855255127
+    },
+    "integrated_turns_per_env": 4.594928181310992,
+    "drop_events_estimate": 1,
+    "object_mass_kg": 0.1638205200433731
+  },
+  "origin_training_base_commit": "0f577c72e86f3df3e2a7f7960e02729b413d9d42",
+  "origin_training_worktree_dirty": true,
+  "origin_training_diff_sha256": "77e36a26051ca0706ae40437765dc7703cf3c6e2108238eaf809cd943b8a5a15"
+}

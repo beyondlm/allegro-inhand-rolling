@@ -30,6 +30,9 @@ These are integration smoke checks, not a reproduced trained-policy performance 
 | Checkpoint playback, 4 environments, 50 steps, gravity -10 m/s², curriculum disabled | Passed; finite observations and rewards; JIT and ONNX export completed |
 | `newton_gl`, 20 steps with no display (EGL) | Passed; no window requested |
 | `newton_gl`, 60 steps under an isolated Xvfb display | Passed; visible-viewer code path exercised |
+| Five original 1,499-iteration policies, 64 environments and 1,200 steps each | Direct loading passed; results in PRETRAINED_POLICY.md |
+| Packaged original policy, independent seed 7, same evaluation horizon | Passed; 4.595 turns per environment, one observed drop among 128 episodes |
+| Real-time packaged-policy preview, 60 steps under Xvfb | Passed; JSON written before Kit shutdown |
 
 Playback uses the official RSL-RL backend with a temporary harness limiting only the playback loop to 50 inference-mode
 steps. That temporary loop bound is not part of the package. The checkpoint has only three training iterations and is
@@ -49,7 +52,9 @@ The extracted task had stale APIs after merging its newer upstream base. Runtime
   normalization, initial standard deviation, and PPO hyperparameters.
 - Conflicting deprecated grasp actuator limits: use `joint_effort_limit` and `actuator_effort_limit`, both 2.0.
 
-Reward equations, observation construction, action processing, and reset logic are unchanged.
+Reward equations, observation construction, action processing, and reset logic are unchanged. The public evaluator
+loads the packaged policy directly, uses inference mode, fixes gravity with no curriculum, and emits JSON before Kit
+closes. RL runtime imports are deferred until Kit initialization to avoid premature plugin initialization.
 
 ## Graphics limitation
 
@@ -66,12 +71,13 @@ confirmation; Xvfb is not an equivalent test of that desktop's exact graphics st
 
 ## Remaining baseline and release work
 
-- The inherited cylinder USD does not expose a mass schema for the legacy mass override: the configuration declares
-  0.05 kg, but this runtime reports approximately 0.16382052 kg and logs `modify_mass_properties` warnings. This remains
-  unchanged pending comparison with the original working baseline; changing mass would alter task physics.
+- The inherited cylinder USD lacks a mass schema, so the legacy 0.05 kg declaration was a no-op. That misleading
+  declaration has been removed. The density-derived mass remains 0.16382052 kg, as verified before and after the
+  change; the packaged original policy was evaluated with this mass. Applying 0.05 kg would change task physics.
 - Other upstream schema-deprecation and USD diagnostic warnings remain. Newton physics is not part of the tested
   compatibility claim; the OpenGL viewer tests still use PhysX physics.
-- Select and evaluate the original demonstration checkpoint, including its runner/checkpoint format compatibility,
-  or train and validate a new release policy.
+- The original checkpoint has been packaged and evaluated without conversion; its exact match to the historical
+  GIF remains unverified. The host OpenGL command was reported as run, but its log is empty and desktop display
+  confirmation is still pending.
 - Confirm cylinder/texture provenance and redistribution terms with the author.
 - Publish a versioned repository/release, then link it in PR #6345 for maintainer review and README listing.

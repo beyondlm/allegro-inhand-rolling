@@ -19,6 +19,7 @@ allegro_inhand = "allegro_inhand.tasks"
 allegro-generate-grasps = "allegro_inhand.tools.allegro_gen_grasp:main"
 allegro-view-grasps = "allegro_inhand.tools.allegro_viz_cache:main"
 allegro-score-grasps = "allegro_inhand.tools.allegro_cache_score:main"
+allegro-evaluate = "allegro_inhand.tools.allegro_evaluate:main"
 
 [project.optional-dependencies]
 # Runtime without the optional multi-gigabyte predownloaded extension caches.

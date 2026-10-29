@@ -59,7 +59,33 @@ The scale suffix is appended automatically; the default output is
 uv run allegro-score-grasps --cache outputs/grasp_cache/allegro_grasp_linspace_0.8-0.8-1.npy --json
 ```
 
-## Train and evaluate
+## Pretrained policy
+
+The package includes the original `model_1499.pt` checkpoint from experiment `2026-08-01_20-45-00` in the PR checkout.
+Its bytes and learned normalization statistics are retained without conversion. It uses 121 observations and 16 actions.
+The cylinder retains its density-derived mass, approximately 0.164 kg at scale 0.8.
+
+View the trained rolling policy in an OpenGL window:
+
+```bash
+uv run --locked --extra isaacsim allegro-evaluate --num_envs 1 --steps 10000 --viz newton_gl --real-time
+```
+
+Evaluate at a fixed gravity of -10 m/s² with the gravity curriculum disabled:
+
+```bash
+uv run --locked --extra isaacsim allegro-evaluate --num_envs 64 --steps 1200 --seed 7 --viz none --output outputs/evaluation.json
+```
+
+Use `--checkpoint /absolute/path/to/model.pt` to evaluate another compatible RSL-RL checkpoint. Each run reports
+checkpoint identity, finite-value checks, rotation, displacement, drop events, and the actual object mass.
+The reported success metric is a time average of the task's success flag; it is not an episode success percentage.
+
+Across two seeds, the bundled policy averaged about 4.6 turns per environment over 40 simulated seconds. One drop
+was observed among 256 completed episodes. See [policy provenance and results](docs/PRETRAINED_POLICY.md).
+The historical GIF above has not been matched to an exact checkpoint.
+
+## Train and play a new policy
 
 ```bash
 uv run --extra isaacsim isaaclab train --rl_library rsl_rl --task IsaacContrib-Inhand-Roll-Allegro-v0 --num_envs 4096 --max_iterations 1500 --viz none
@@ -68,14 +94,14 @@ uv run --extra isaacsim isaaclab train --rl_library rsl_rl --task IsaacContrib-I
 To train from a replacement cache, append `env.grasp_cache_path=/absolute/path/to/cache.npy`.
 Checkpoints are written to `logs/rsl_rl/allegro_inhand_roll/`.
 
-Evaluate at the final training gravity, with the gravity curriculum disabled:
+Play a trained checkpoint at final gravity:
 
 ```bash
 uv run --extra isaacsim isaaclab play --rl_library rsl_rl --task IsaacContrib-Inhand-Roll-Allegro-v0 --num_envs 16 --checkpoint /absolute/path/to/model.pt --viz newton_gl env.gravity_curriculum=false 'env.sim.gravity=[0.0,0.0,-10.0]'
 ```
 
-No pretrained checkpoint is bundled yet. The GIF above comes from the original PR; a checkpoint matching the
-validated external-project version must be selected before publishing the first release.
+The official play command exports files beside the input checkpoint. Use `allegro-evaluate` to preview the packaged
+policy without writing into the installed package.
 
 ## Development
 
@@ -90,9 +116,9 @@ Package structure:
 
 ```text
 src/allegro_inhand/
-  assets/data/                cylinder, texture, and reference grasp cache
+  assets/data/                cylinder, texture, grasp cache, and pretrained policy
   tasks/allegro_rotate/       direct environments and PPO configuration
-  tools/                      cache generation, inspection, and scoring commands
+  tools/                      cache commands and fixed-gravity policy evaluation
 docs/PROVENANCE.md             source revision, resource provenance, and ownership
 ```
 

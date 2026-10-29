@@ -21,6 +21,8 @@ It does not require copying files into an Isaac Lab checkout.
   The NVIDIA logo is a third-party mark; project licensing does not grant trademark rights.
 - Grasp cache: the original 50,000-row reset dataset for cylinder scale 0.8. Rows contain 16 joint positions,
   object XYZ, then object quaternion XYZW. Regenerate it when changing assets, joint conventions, or cylinder scales.
+- Policy: the original `2026-08-01_20-45-00/model_1499.pt`, retained without conversion. See
+  [policy provenance and results](PRETRAINED_POLICY.md) for its recorded training state and external-project validation.
 - Demo: the original task GIF; it is historical evidence, not a new validation of the external package.
 
 The source's BSD-3-Clause notices and repository LICENSE are preserved. Confirm the cylinder/texture provenance and
@@ -34,3 +36,4 @@ redistribution terms before the first public release.
 | `nvidia-logo-vert-rgb-blk-no-reg-for-screen.png` | `f514796ed3fdbca5513275c5a97158ef6c6359f6b8d2d3a0fe0645a632608179` |
 | `allegro_grasp_linspace_0.8-0.8-1.npy` | `e5431335584da7ece062e8565c8c00f5312041db64b864fdaf32506156468b64` |
 | `allegro_rotate_demo.gif` | `cfe2278181e6fc8050aa77707a1ea4c755588f9f8128b1d7bee1c28ac6676549` |
+| `allegro_inhand_roll.pt` | `f80bc191be2ec6725724e85bb904e5ec57113c304c27bee5832b523b8d9b3809` |

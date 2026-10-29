@@ -166,7 +166,8 @@ def _cylinder_object_cfg(pos=CYLINDER_INIT_POS, rot=CYLINDER_INIT_ROT) -> RigidO
                 stabilization_threshold=0.0025,
                 max_depenetration_velocity=1000.0,
             ),
-            mass_props=sim_utils.MassPropertiesCfg(mass=0.05),
+            # The original USD has no MassAPI, so its legacy 0.05 kg override
+            # was a no-op. Preserve the validated density-derived mass instead.
             scale=(0.8, 0.8, 0.8),
             collision_props=sim_utils.CollisionPropertiesCfg(contact_offset=0.004, rest_offset=0.0),
         ),

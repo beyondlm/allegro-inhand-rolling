@@ -10,3 +10,4 @@ from pathlib import Path
 ASSETS_DIR = Path(__file__).resolve().parent / "data"
 GRASP_CACHE_PREFIX = ASSETS_DIR / "cache" / "allegro_grasp_linspace"
 DEFAULT_GRASP_CACHE = ASSETS_DIR / "cache" / "allegro_grasp_linspace_0.8-0.8-1.npy"
+DEFAULT_POLICY_CHECKPOINT = ASSETS_DIR / "checkpoints" / "allegro_inhand_roll.pt"
