@@ -42,13 +42,21 @@ entrypoints. Current source layouts without those fields use the existing direct
 | Source/interpreter/linked-runtime path verification | Passed |
 | 4 environments, 100 policy steps, fixed -10 m/s² gravity, no visualizer | Passed; finite observations and rewards |
 | Real host X display `:1`, OpenGL, real time, 60 policy steps | Passed; exit 0, JSON report generated |
+| Author-run host OpenGL preview, real time, 1,800 policy steps | Passed; author confirmed the visual test, finite JSON result, no drops |
 | 64 environments, seed 7, 1,200 steps (40 simulated seconds per environment) | Passed; results below |
 
 The full evaluation completed 128 episodes. Mean integrated rotation was 4.59493 turns per environment, mean object
 displacement was 0.43677 mm, and one drop event was observed. The measured mass was 0.16382052 kg. These results
 match the prior locked-environment seed-7 evaluation. They are finite-sample evidence rather than a no-drop guarantee.
 
-The actual desktop run uses the existing Xorg display, unlike the earlier Xvfb checks. The Kit/RTX viewer is not
+The author subsequently ran the source launcher on the host for 1,800 steps with one environment and seed 42,
+then confirmed the visual test passed. The run completed three episodes over 60 simulated seconds, integrated
+6.98494 turns, and recorded no drop events. Mean object displacement was 0.37103 mm, and all observations and
+rewards were finite. The raw report is `outputs/validation/host-lab3.json`; a path-independent copy is retained in
+the packaged checkpoint metadata under `host_desktop_validation`.
+
+The actual desktop runs use the existing Xorg display, unlike the earlier Xvfb checks. The Kit/RTX viewer is not
 covered by this success; this launch uses the OpenGL viewer with PhysX physics.
 
-Logs and JSON reports are under the git-ignored `outputs/validation/local-lab3-*` paths.
+Logs and JSON reports are under the git-ignored `outputs/validation/local-lab3-*` and
+`outputs/validation/host-lab3.*` paths.

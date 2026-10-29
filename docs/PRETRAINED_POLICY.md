@@ -49,5 +49,6 @@ separately from episode-level success. `drop_events_estimate` sums the task's in
 across the full batch and horizon. Checkpoint identity and evaluation conditions are included in each JSON report.
 
 The real-time OpenGL policy-preview path was also checked for 60 steps under an isolated Xvfb display.
-A later 60-step real desktop run also passed using the user-selected local Lab 3.0 source workflow; see
-[local source validation](LOCAL_LAB.md).
+A later 60-step real desktop run also passed using the user-selected local Lab 3.0 source workflow. The author
+then confirmed a 1,800-step host preview passed with three completed episodes, 6.985 integrated turns, no drops,
+and finite observations and rewards. See [local source validation](LOCAL_LAB.md).

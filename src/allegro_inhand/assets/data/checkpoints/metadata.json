@@ -94,5 +94,38 @@
     "integrated_turns_per_env": 4.594928181310992,
     "drop_events_estimate": 1,
     "object_mass_kg": 0.1638205200433731
+  },
+  "host_desktop_validation": {
+    "date": "2026-10-29",
+    "source_commit": "e3f7d9ff1f5d7f8280de3ece9000b7117f66bcf4",
+    "release": "3.0.0",
+    "runtime": "existing local Isaac Sim 6.2 build",
+    "visualizer": "newton_gl",
+    "real_time": true,
+    "author_confirmed_visual_test": true,
+    "task": "IsaacContrib-Inhand-Roll-Allegro-v0",
+    "checkpoint_sha256": "f80bc191be2ec6725724e85bb904e5ec57113c304c27bee5832b523b8d9b3809",
+    "checkpoint_iteration": 1499,
+    "num_envs": 1,
+    "steps": 1800,
+    "seed": 42,
+    "gravity": [
+      0.0,
+      0.0,
+      -10.0
+    ],
+    "gravity_curriculum": false,
+    "all_finite": true,
+    "completed_episodes": 3,
+    "metrics_time_mean": {
+      "rotate/ang_vel": 0.7314608693122864,
+      "rotate/object_pos_diff": 0.00037102881469763815,
+      "rotate/drop_rate": 0.0,
+      "rotate/success_rate": 0.9033333659172058,
+      "rotate/total_reward": 3.2921903133392334
+    },
+    "integrated_turns_per_env": 6.984936781760714,
+    "drop_events_estimate": 0,
+    "object_mass_kg": 0.1638205200433731
   }
 }

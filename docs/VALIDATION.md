@@ -1,7 +1,8 @@
 # Validation
 
 Checked on 2026-10-29 on Linux x86-64, an RTX 5880 Ada, and NVIDIA driver 580.178.04.
-These are integration smoke checks, not a reproduced trained-policy performance result.
+Checks cover packaging, runtime integration, and fixed-horizon evaluation of the original pretrained policy.
+Full training from scratch has not been reproduced.
 
 ## Revisions and environment
 
@@ -35,8 +36,8 @@ These are integration smoke checks, not a reproduced trained-policy performance 
 | Real-time packaged-policy preview, 60 steps under Xvfb | Passed; JSON written before Kit shutdown |
 
 Playback uses the official RSL-RL backend with a temporary harness limiting only the playback loop to 50 inference-mode
-steps. That temporary loop bound is not part of the package. The checkpoint has only three training iterations and is
-not suitable as the release policy or evidence of learned rolling behavior.
+steps. That temporary loop bound is not part of the package. This initial smoke-test checkpoint has only three
+training iterations. The separately packaged original 1,499-iteration policy is evaluated in PRETRAINED_POLICY.md.
 
 Logs and generated artifacts are under the git-ignored `outputs/validation/` and `logs/rsl_rl/allegro_inhand_roll/`.
 The lightweight wheel environment uses Python 3.12.13, NumPy 2.5.4, Gymnasium 1.4.0, and pytest 9.2.0.
@@ -88,5 +89,6 @@ claimed to be fixed by that separate source-based result.
 
 The user-selected source checkout `e3f7d9ff1f` and its existing named Python environment were verified through
 `scripts/evaluate_with_lab.sh`, including 100 headless steps, 60 real desktop OpenGL steps, and a 64-environment,
-1,200-step seed-7 evaluation. The helper does not install into or synchronize that environment. Details and precise
-results are recorded in [LOCAL_LAB.md](LOCAL_LAB.md).
+1,200-step seed-7 evaluation. The author then confirmed a 1,800-step host OpenGL run passed: three completed
+episodes, 6.985 integrated turns, no drops, and finite observations and rewards. The helper does not install into
+or synchronize that environment. Details and precise results are recorded in [LOCAL_LAB.md](LOCAL_LAB.md).
