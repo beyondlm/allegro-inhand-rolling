@@ -41,7 +41,10 @@ training iterations. The separately packaged original 1,499-iteration policy is 
 
 Logs and generated artifacts are under the git-ignored `outputs/validation/` and `logs/rsl_rl/allegro_inhand_roll/`.
 The lightweight wheel environment uses Python 3.12.13, NumPy 2.5.4, Gymnasium 1.4.0, and pytest 9.2.0.
-The GitHub Actions workflow reproduces lightweight packaging checks; it has not yet run on GitHub.
+The GitHub Actions workflow reproduces lightweight packaging checks. The
+[first public run](https://github.com/beyondlm/allegro-inhand-rolling/actions/runs/40830194891) passed lint,
+formatting, launcher syntax, distribution builds, installed-wheel resource tests, and cache scoring.
+The installed-wheel tests passed twice and skipped the runtime-only configuration test, as expected without Isaac Sim.
 
 ## Compatibility adaptations
 
@@ -83,7 +86,8 @@ claimed to be fixed by that separate source-based result.
   GIF remains unverified. Earlier direct host logs were empty; the new source-based launch has completed on the
   real desktop display with a finite-value JSON result.
 - Confirm cylinder/texture provenance and redistribution terms with the author.
-- Publish a versioned repository/release, then link it in PR #6345 for maintainer review and README listing.
+- The independent [public repository](https://github.com/beyondlm/allegro-inhand-rolling) is available on `main`.
+  Inclusion in the upstream contributed-project list is subject to maintainer review of PR #6345.
 
 ## Selected local Lab 3.0 source
 

@@ -1,11 +1,14 @@
 # Source and ownership
 
 This standalone project was extracted from [Isaac Lab PR #6345](https://github.com/isaac-sim/IsaacLab/pull/6345).
+Its independent repository is [beyondlm/allegro-inhand-rolling](https://github.com/beyondlm/allegro-inhand-rolling);
+it is not a fork of Isaac Lab.
 
 - Task source: `beyondlm/IsaacLab`, branch `feature/allegro-rotate-cylinder`.
 - Extraction commit: `8bf8bae5d7fa62752c7809ac0cb7463c7a9dc42f`.
 - Official upstream dependency: `isaac-sim/IsaacLab` at `46d6cc3d7b115906fad12efd372fbf69f4e3d3ed`.
-- Project maintainer: beyondlm; project support and compatibility updates belong in this repository's issue tracker.
+- Project maintainer: beyondlm; project support and compatibility updates belong in
+  [this repository's issue tracker](https://github.com/beyondlm/allegro-inhand-rolling/issues).
 - Task IDs, reward equations, observation layout, control settings, and cached reset states are retained from that source.
 
 The external project owns task registration, package resource paths, command entry points, and writable output paths.
