@@ -1,0 +1,103 @@
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13"]
+build-backend = "uv_build"
+
+[project]
+name = "allegro-inhand-rolling"
+version = "0.1.0"
+description = "Allegro hand cylinder rolling and stable-grasp cache tools for Isaac Lab."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "beyondlm" }]
+requires-python = ">=3.12,<3.13"
+dependencies = ["isaaclab[rsl-rl]==3.0.0"]
+
+[project.entry-points."isaaclab.tasks"]
+allegro_inhand = "allegro_inhand.tasks"
+
+[project.scripts]
+allegro-generate-grasps = "allegro_inhand.tools.allegro_gen_grasp:main"
+allegro-view-grasps = "allegro_inhand.tools.allegro_viz_cache:main"
+allegro-score-grasps = "allegro_inhand.tools.allegro_cache_score:main"
+
+[project.optional-dependencies]
+# Runtime without the optional multi-gigabyte predownloaded extension caches.
+isaacsim = ["isaacsim[all]==6.2.0.0", "PyJWT[crypto]>=2.15.1,<3"]
+extscache = ["isaacsim[extscache]==6.2.0.0"]
+video = ["isaaclab[video]==3.0.0"]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "ruff==0.14.10"]
+
+[tool.uv]
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+index-strategy = "unsafe-best-match"
+prerelease = "allow"
+# Preserve the pinned upstream workspace overrides, which are not inherited from a wheel.
+override-dependencies = [
+    "numpy>=2",
+    "mujoco~=3.15.0",
+    "mujoco-warp~=3.15.0",
+    "newton[sim] @ git+https://github.com/newton-physics/newton.git@71eeba16a717d4dcf0b9dd7056a7b6f863054dc3",
+    "newton-usd-schemas>=0.5.0",
+    "usd-exchange==3.0.1",
+    "usd-optimize~=1.3.1",
+    "torch==2.11.0",
+    "torchvision==0.26.0",
+    "fsspec>=2026.6.0",
+    "packaging>=20,<27",
+    "urllib3>=2.8.0",
+]
+
+[tool.uv.sources]
+omniverseclient = { index = "pypi-public" }
+ovphysx = { index = "pypi-public" }
+ovrtx = { index = "pypi-public" }
+ovstage = { index = "pypi-public" }
+torch = { index = "pytorch-cu130" }
+torchvision = { index = "pytorch-cu130" }
+isaaclab = { git = "https://github.com/isaac-sim/IsaacLab.git", rev = "46d6cc3d7b115906fad12efd372fbf69f4e3d3ed", subdirectory = "tools/wheel_builder" }
+
+[tool.uv.build-backend]
+module-name = "allegro_inhand"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["allegro_inhand"]
+section-order = ["future", "standard-library", "third-party", "isaaclab", "isaaclab-rl", "isaaclab-tasks", "isaaclab-assets", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+isaaclab = ["isaaclab", "isaaclab_newton", "isaaclab_ov", "isaaclab_physx"]
+"isaaclab-rl" = ["isaaclab_rl"]
+"isaaclab-tasks" = ["isaaclab_tasks"]
+"isaaclab-assets" = ["isaaclab_assets"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F401"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[[tool.uv.index]]
+url = "https://pypi.nvidia.com"
+explicit = false
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "pypi-public"
+url = "https://pypi.org/simple"
+explicit = true

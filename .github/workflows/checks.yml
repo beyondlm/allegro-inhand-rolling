@@ -1,0 +1,31 @@
+name: Package checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  wheel-and-resources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - name: Lint and format
+        run: |
+          uv tool run ruff@0.14.10 check .
+          uv tool run ruff@0.14.10 format --check .
+      - name: Build distributions
+        run: uv build
+      - name: Install wheel with only lightweight test dependencies
+        run: |
+          uv venv .venv-wheel --python 3.12
+          uv pip install --python .venv-wheel/bin/python --no-deps dist/*.whl
+          uv pip install --python .venv-wheel/bin/python numpy==2.5.4 gymnasium==1.4.0 pytest==9.2.0
+      - name: Check installed discovery and resources outside the checkout
+        run: |
+          PROJECT_ROOT="$PWD"
+          cd /tmp
+          "$PROJECT_ROOT/.venv-wheel/bin/python" -m pytest -q "$PROJECT_ROOT/tests"
+          "$PROJECT_ROOT/.venv-wheel/bin/allegro-score-grasps" --json
