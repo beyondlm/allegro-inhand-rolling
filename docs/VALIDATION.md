@@ -44,7 +44,8 @@ The lightweight wheel environment uses Python 3.12.13, NumPy 2.5.4, Gymnasium 1.
 The GitHub Actions workflow reproduces lightweight packaging checks. The
 [first public run](https://github.com/beyondlm/allegro-inhand-rolling/actions/runs/40830194891) passed lint,
 formatting, launcher syntax, distribution builds, installed-wheel resource tests, and cache scoring.
-The installed-wheel tests passed twice and skipped the runtime-only configuration test, as expected without Isaac Sim.
+The installed-wheel run reported two passed tests and one skipped runtime-only configuration test, as expected
+without Isaac Sim.
 
 ## Compatibility adaptations
 
