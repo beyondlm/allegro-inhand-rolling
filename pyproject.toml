@@ -12,6 +12,11 @@ authors = [{ name = "beyondlm" }]
 requires-python = ">=3.12,<3.13"
 dependencies = ["isaaclab[rsl-rl]==3.0.0"]
 
+[project.urls]
+Repository = "https://github.com/beyondlm/allegro-inhand-rolling"
+Issues = "https://github.com/beyondlm/allegro-inhand-rolling/issues"
+Documentation = "https://github.com/beyondlm/allegro-inhand-rolling#readme"
+
 [project.entry-points."isaaclab.tasks"]
 allegro_inhand = "allegro_inhand.tasks"
 

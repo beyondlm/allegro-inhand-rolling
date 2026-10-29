@@ -3,7 +3,16 @@
 A standalone Isaac Lab project for rolling a cylinder with the Allegro hand, starting from cached stable grasps.
 Extracted from [Isaac Lab PR #6345](https://github.com/isaac-sim/IsaacLab/pull/6345).
 
+[![Package checks](https://github.com/beyondlm/allegro-inhand-rolling/actions/workflows/checks.yml/badge.svg)](https://github.com/beyondlm/allegro-inhand-rolling/actions/workflows/checks.yml)
+
 ![Original Allegro rolling policy](docs/media/allegro_rotate_demo.gif)
+
+Clone this independent project:
+
+```bash
+git clone https://github.com/beyondlm/allegro-inhand-rolling.git
+cd allegro-inhand-rolling
+```
 
 ## Use an existing Lab 3.0 checkout
 
